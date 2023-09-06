@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 
-export async function getProducts() {
+async function getProducts() {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
@@ -14,7 +14,7 @@ export async function getProducts() {
     const response = await axios.get(endPoint, { headers });
     return response.data.data;
   } catch (error) {
-    return null;
+    return [];
   }
 }
 
