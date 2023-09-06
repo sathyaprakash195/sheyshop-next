@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@400;500&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500;
+}
+
+/* styling for html form elements elements */
+
+button {
+  height: 40px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+input,
+textarea,
+select {
+  min-height: 42px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  padding: 10px;
+}
+
+.ant-form-item {
+  margin-bottom: 0px !important;
+}
+
+.ant-form-item-label {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.ant-picker {
+  height: 45px !important;
+  border: none !important;
+  border-radius: 2px !important;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+i{
+  cursor: pointer;
+}
