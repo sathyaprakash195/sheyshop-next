@@ -6,11 +6,16 @@ connectDB();
 
 export async function GET(req: NextRequest) {
   try {
+    const searchParams = new URL(req.nextUrl).searchParams;
+    const search = searchParams.get("search") !== 'undefined' ? searchParams.get("search") : '';
     await validateApiRequest(req);
-    const products = await Product.find({}).populate("category");
+     
+    console.log("searchvalue", search);
+    const products = await Product.find({
+      name: { $regex: search || "", $options: "i" },
+    }).populate("category");
     return NextResponse.json({ data: products });
-  } catch (error : any) {
-    console.log(error);
+  } catch (error: any) {
     return NextResponse.json({ message: error.message });
   }
 }

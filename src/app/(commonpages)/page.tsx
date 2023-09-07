@@ -2,19 +2,22 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
+import Searchbar from "./_componenents/Searchbar";
+import { Spin } from "antd";
 
-async function getProducts() {
+async function getProducts(filters: any) {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
     const headers = {
       Cookie: `token=${token}`,
     };
-    const endPoint = `${process.env.domain}/api/products`;
+    const endPoint = `${process.env.domain}/api/products?search=${filters.search}`;
     const response = await axios.get(endPoint, { headers });
     return response.data.data;
   } catch (error) {
     return [];
+  } finally {
   }
 }
 
@@ -24,14 +27,16 @@ function getProductName(name: string) {
   return productName;
 }
 
-export default async function Home() {
-  const products = await getProducts();
+export default async function Home({ searchParams }: { searchParams: any }) {
+  const products = await getProducts(searchParams);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
       <h1 className="text-2xl font-semibold text-gray-700 col-span-6">
         Products
       </h1>
-
+      <div className="col-span-6">
+        <Searchbar />
+      </div>
       {products.map((product: any) => (
         <Link href={`/products/${product._id} `} key={product._id}>
           <div
