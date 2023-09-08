@@ -14,7 +14,7 @@ async function getProducts(filters: any) {
     };
     const endPoint = `${process.env.domain}/api/products?search=${filters.search}`;
     const response = await axios.get(endPoint, { headers });
-    return response.data.data;
+    return response.data.data || [];
   } catch (error) {
     return [];
   } finally {
@@ -37,22 +37,29 @@ export default async function Home({ searchParams }: { searchParams: any }) {
       <div className="col-span-6">
         <Searchbar />
       </div>
-      {products.map((product: any) => (
-        <Link href={`/products/${product._id} `} key={product._id}>
-          <div
-            key={product._id}
-            className="flex flex-col items-center justify-center gap-2 p-4 border-gray-300 border border-solid cursor-pointer hover:border-gray-400"
-          >
-            <Image src={product.images[0]} alt={""} width={150} height={150} />
-            <h1 className="text-sm text-gray-500 truncate">
-              {getProductName(product.name)}
-            </h1>
-            <h1 className="text-lg font-semibold text-gray-700">
-              $ {product.price}
-            </h1>
-          </div>
-        </Link>
-      ))}
+      {products &&
+        products?.length > 0 &&
+        products.map((product: any) => (
+          <Link href={`/products/${product._id} `} key={product._id}>
+            <div
+              key={product._id}
+              className="flex flex-col items-center justify-center gap-2 p-4 border-gray-300 border border-solid cursor-pointer hover:border-gray-400"
+            >
+              <Image
+                src={product.images[0]}
+                alt={""}
+                width={150}
+                height={150}
+              />
+              <h1 className="text-sm text-gray-500 truncate">
+                {getProductName(product.name)}
+              </h1>
+              <h1 className="text-lg font-semibold text-gray-700">
+                $ {product.price}
+              </h1>
+            </div>
+          </Link>
+        ))}
     </div>
   );
 }
