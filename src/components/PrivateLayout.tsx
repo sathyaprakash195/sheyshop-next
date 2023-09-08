@@ -60,7 +60,7 @@ function PrivateLayout({ children }: { children: React.ReactNode }) {
           if (currentUser.isAdmin) {
             router.push("/admin");
           } else {
-            router.push("/profile");
+            router.push("/admin");
           }
         }}
       >
