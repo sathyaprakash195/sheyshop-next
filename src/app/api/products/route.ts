@@ -7,7 +7,7 @@ import Product from "@/models/ProductModel";
 import { NextResponse, NextRequest } from "next/server";
 connectDB();
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
     const searchParams = new URL(req.nextUrl).searchParams;
     const search = searchParams.get("search") !== 'undefined' ? searchParams.get("search") : '';

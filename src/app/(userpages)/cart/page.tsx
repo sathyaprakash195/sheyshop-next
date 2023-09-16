@@ -4,6 +4,7 @@ import { ProductType } from "@/interfaces";
 import { AddItemToCart, ClearItemInCart, RemoveItemFromCart } from "@/redux/CartSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Checkout from "./Checkout";
 
 function Cart() {
   const { items } = useSelector((state: any) => state.cart);
@@ -18,7 +19,7 @@ function Cart() {
 
       {items.length > 0 && (
         <div className="mt-4">
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-10">
             <div className="col-span-2">
               <div className="grid grid-cols-5 gap-2 my-5">
                 <h1 className="text-sm col-span-2">Product</h1>
@@ -72,6 +73,8 @@ function Cart() {
                 ))}
               </div>
             </div>
+
+            <Checkout />
           </div>
         </div>
       )}
